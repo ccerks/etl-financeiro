@@ -44,7 +44,7 @@ The project follows an organized structure to ensure scalability and security:
     
    [x] Multi-asset extraction implementation (Loops and Functions).
     
-   [ ] Data persistence in SQLite/PostgreSQL database.
+   [x] Data persistence in SQLite/PostgreSQL database.
     
    [ ] Pipeline orchestration for automated execution.
 
