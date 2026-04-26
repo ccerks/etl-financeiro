@@ -1,3 +1,5 @@
 venv/
 .env
-data/
+
+data/*
+!data/finance_data.db
