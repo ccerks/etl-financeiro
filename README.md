@@ -1,24 +1,33 @@
-# Financial Data Extraction Pipeline - Crypto Index 📈
+# Financial Data Engineering Pipeline - Crypto Index 📈
 
-This project is a Data Engineering laboratory focused on building an ETL (Extract, Transform, Load) pipeline for monitoring financial assets. Currently, the pipeline extracts historical cryptocurrency data via API and processes the information for further analysis.
+This project is a complete Data Engineering laboratory that implements a professional ETL (Extract, Transform, Load) pipeline. It automates the collection of cryptocurrency data, stores it in a cloud-based relational database, and provides an interactive analytics dashboard.
 
 ## 🏗️ Project Architecture
 
-The project follows an organized structure to ensure scalability and security:
+The pipeline is designed with a modern cloud-native approach:
 
-- `notebooks/`: Contains Jupyter Notebooks used for experimentation and development of the extraction code.
-- `data/`: Local directory for storing processed files (CSV/Parquet). *Note: data files are ignored by Git following storage best practices.*
-- `.env`: Management of credentials and API keys (protected for security).
-- `.gitignore`: Configuration to prevent uploading virtual environments, sensitive data, and temporary files.
+- **Data Source:** Real-time data extraction via CoinGecko REST API.
+- **Orchestration:** Automated execution using GitHub Actions (CI/CD).
+- **Storage:** Cloud-based PostgreSQL database (Supabase) using SQLAlchemy.
+- **Frontend:** Interactive Analytics Dashboard built with Streamlit Cloud.
+- **Security:** Environment variable management (`.env`) and Secret Management (GitHub/Streamlit).
+
+## 📂 Project Structure
+
+- `main.py`: The core ETL engine (Extraction & Cloud Loading).
+- `app.py`: Streamlit dashboard with financial indicators (MA7, % Delta).
+- `notebooks/`: Experimental development and API testing.
+- `requirements.txt`: Project dependencies for cloud deployment.
+- `.env`: Local credentials (ignored by Git).
 
 ## 🛠️ Technologies Used
 
-- **Language:** Python 3.12+
-- **Libraries:** - `Pandas`: For data manipulation and cleaning.
-  - `Requests`: For consuming the CoinGecko API.
-  - `Python-dotenv`: For environment variable management.
-- **Environment:** VS Code with Jupyter extensions.
-- **Version Control:** Git & GitHub.
+- **Python 3.12+**
+- **Pandas:** Data manipulation and feature engineering.
+- **SQLAlchemy:** SQL Toolkit and Object Relational Mapper (ORM).
+- **Streamlit:** Interactive data visualization.
+- **PostgreSQL (Supabase):** Relational cloud database.
+- **GitHub Actions:** Automated workflow orchestration.
 
 ## 🚀 How to Run
 
@@ -28,24 +37,24 @@ The project follows an organized structure to ensure scalability and security:
   2. **Set up the virtual environment:**
      ```bash
      python -m venv venv
-     source venv/Scripts/activate  # On Windows
+     source venv/Scripts/activate  # Windows: .\venv\Scripts\activate
   3. **Install dependencies:**
      ```bash
-     pip install pandas requests python-dotenv ipykernel
+     pip install -r requirements.txt
   
   4. **Environment Variables:**
-      Create a .env file in the root directory and add your keys (if necessary).
+      Create a .env file and add your DATABASE_URL.
 
-📈 Roadmap
+📈 Roadmap (Milestones)
 
-   [x] Initial Bitcoin data extraction.
-    
-   [x] Professional versioning and folder structure.
-    
-   [x] Multi-asset extraction implementation (Loops and Functions).
-    
-   [x] Data persistence in SQLite/PostgreSQL database.
-    
-   [ ] Pipeline orchestration for automated execution.
+[x] Multi-asset extraction implementation.
+
+[x] Cloud Database migration (SQLite to PostgreSQL/Supabase).
+
+[x] CI/CD Automation with GitHub Actions.
+
+[x] Interactive Dashboard with Moving Averages and KPIs.
+
+[ ] Implement Logging & Error Handling system.
 
 **Developed by** [Caio Cerqueira](https://github.com/ccerks) 🚀
