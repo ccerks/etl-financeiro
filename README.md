@@ -41,9 +41,10 @@ The pipeline is designed with a modern cloud-native approach:
   3. **Install dependencies:**
      ```bash
      pip install -r requirements.txt
-  
+     
   4. **Environment Variables:**
-      Create a .env file and add your DATABASE_URL.
+     ```bash
+     Create a .env file and add your DATABASE_URL.
 
 📈 Roadmap (Milestones)
 
