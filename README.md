@@ -24,7 +24,7 @@ The project follows an organized structure to ensure scalability and security:
 
   1. **Clone the repository:**
      ```bash
-     git clone [https://github.com/ccerks/etl-financeiro.git](https://github.com/ccerks/etl-financeiro.git)
+     git clone https://github.com/ccerks/etl-financeiro.git
   2. **Set up the virtual environment:**
      ```bash
      python -m venv venv
