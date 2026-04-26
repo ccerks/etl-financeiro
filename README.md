@@ -22,6 +22,30 @@ The project follows an organized structure to ensure scalability and security:
 
 ## 🚀 How to Run
 
-1. **Clone the repository:**
-   ```bash
-   git clone [https://github.com/ccerks/etl-financeiro.git](https://github.com/ccerks/etl-financeiro.git)
+  1. **Clone the repository:**
+     ```bash
+     git clone https://github.com/ccerks/etl-financeiro.git
+  2. **Set up the virtual environment:**
+     ```bash
+     python -m venv venv
+      source venv/Scripts/activate  # On Windows
+  3. **Install dependencies:**
+     ```bash
+     pip install pandas requests python-dotenv ipykernel
+  
+  4. **Environment Variables:**
+      Create a .env file in the root directory and add your keys (if necessary).
+
+📈 Roadmap
+
+   [x] Initial Bitcoin data extraction.
+    
+   [x] Professional versioning and folder structure.
+    
+   [x] Multi-asset extraction implementation (Loops and Functions).
+    
+   [ ] Data persistence in SQLite/PostgreSQL database.
+    
+   [ ] Pipeline orchestration for automated execution.
+
+**Developed by** [Caio Cerqueira](https://github.com/ccerks) 🚀
