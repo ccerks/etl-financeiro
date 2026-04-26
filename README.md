@@ -1,53 +1,27 @@
-# Pipeline de Extração de Dados Financeiros - Crypto Index 📈
+# Financial Data Extraction Pipeline - Crypto Index 📈
 
-Este projeto é um laboratório de Engenharia de Dados focado na construção de um pipeline ETL (Extract, Transform, Load) para monitoramento de ativos financeiros. Atualmente, o pipeline realiza a extração de dados históricos de criptoativos via API e processa as informações para análise.
+This project is a Data Engineering laboratory focused on building an ETL (Extract, Transform, Load) pipeline for monitoring financial assets. Currently, the pipeline extracts historical cryptocurrency data via API and processes the information for further analysis.
 
-## 🏗️ Arquitetura do Projeto
+## 🏗️ Project Architecture
 
-O projeto segue uma estrutura organizada para garantir a escalabilidade e segurança:
+The project follows an organized structure to ensure scalability and security:
 
-- `notebooks/`: Contém os Jupyter Notebooks utilizados para experimentação e desenvolvimento do código de extração.
-- `data/`: Diretório local destinado ao armazenamento dos arquivos processados (CSV/Parquet). *Nota: os arquivos de dados são ignorados pelo Git para seguir as boas práticas de storage.*
-- `.env`: Gerenciamento de credenciais e chaves de API (protegido por segurança).
-- `.gitignore`: Configuração para impedir o upload de ambientes virtuais, dados sensíveis e arquivos temporários.
+- `notebooks/`: Contains Jupyter Notebooks used for experimentation and development of the extraction code.
+- `data/`: Local directory for storing processed files (CSV/Parquet). *Note: data files are ignored by Git following storage best practices.*
+- `.env`: Management of credentials and API keys (protected for security).
+- `.gitignore`: Configuration to prevent uploading virtual environments, sensitive data, and temporary files.
 
-## 🛠️ Tecnologias Utilizadas
+## 🛠️ Technologies Used
 
-- **Linguagem:** Python 3.12+
-- **Bibliotecas:** - `Pandas`: Para manipulação e limpeza de dados.
-  - `Requests`: Para consumo da API CoinGecko.
-  - `Python-dotenv`: Para gerenciamento de variáveis de ambiente.
-- **Ambiente:** VS Code com extensões Jupyter.
-- **Versionamento:** Git & GitHub.
+- **Language:** Python 3.12+
+- **Libraries:** - `Pandas`: For data manipulation and cleaning.
+  - `Requests`: For consuming the CoinGecko API.
+  - `Python-dotenv`: For environment variable management.
+- **Environment:** VS Code with Jupyter extensions.
+- **Version Control:** Git & GitHub.
 
-## 🚀 Como Executar
-  
-  1. **Clone o repositório:**
-     ```bash
-     git clone https://github.com/ccerks/etl-financeiro.git
-    
-  2. **Configure o ambiente virtual:**
-     ```bash
-     python -m venv venv
-     source venv/Scripts/activate  # No Windows
-  
-  3. **Configure o ambiente virtual:**
-     ```bash
-     pip install pandas requests python-dotenv ipykernel
-  4. **Variáveis de Ambiente:**
-     Crie um arquivo .env na raiz e adicione suas chaves (se necessário).
-     
-📈 Próximos Passos (Roadmap)
+## 🚀 How to Run
 
-[x] Extração inicial de dados do Bitcoin.
-
-[x] Versionamento profissional e estruturação de pastas.
-
-[ ] Implementação de extração multi-ativos (Loops e Funções).
-
-[ ] Persistência de dados em banco de dados SQLite/PostgreSQL.
-
-[ ] Orquestração do pipeline para execução automática.
-
-Desenvolvido por [Caio Cerqueira](https://github.com/ccerks) 🚀
-  
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/ccerks/etl-financeiro.git](https://github.com/ccerks/etl-financeiro.git)
