@@ -21,16 +21,33 @@ O projeto segue uma estrutura organizada para garantir a escalabilidade e segura
 - **Versionamento:** Git & GitHub.
 
 ## 🚀 Como Executar
-
-1. **Clone o repositório:**
-   ```bash
-   git clone [https://github.com/ccerks/etl-financeiro.git](https://github.com/ccerks/etl-financeiro.git)
   
-2. **Configure o ambiente virtual:**
-   ```bash
-   python -m venv venv
-   source venv/Scripts/activate  # No Windows
+  1. **Clone o repositório:**
+     ```bash
+     git clone https://github.com/ccerks/etl-financeiro.git
+    
+  2. **Configure o ambiente virtual:**
+     ```bash
+     python -m venv venv
+     source venv/Scripts/activate  # No Windows
+  
+  3. **Configure o ambiente virtual:**
+     ```bash
+     pip install pandas requests python-dotenv ipykernel
+  4. **Variáveis de Ambiente:**
+     Crie um arquivo .env na raiz e adicione suas chaves (se necessário).
+     
+📈 Próximos Passos (Roadmap)
 
-3. **Configure o ambiente virtual:**
-   ```bash
-   pip install pandas requests python-dotenv ipykernel
+[x] Extração inicial de dados do Bitcoin.
+
+[x] Versionamento profissional e estruturação de pastas.
+
+[ ] Implementação de extração multi-ativos (Loops e Funções).
+
+[ ] Persistência de dados em banco de dados SQLite/PostgreSQL.
+
+[ ] Orquestração do pipeline para execução automática.
+
+Desenvolvido por [Caio Cerqueira](https://github.com/ccerks) 🚀
+  
