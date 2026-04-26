@@ -1,8 +1,12 @@
 import requests
 import pandas as pd
-import sqlite3
 import time
 import os
+from sqlalchemy import create_engine
+from dotenv import load_dotenv
+
+# Carrega as senhas do arquivo .env
+load_dotenv()
 
 def fetch_crypto_data(asset_list):
     """Fetches market data from CoinGecko API."""
@@ -27,29 +31,25 @@ def fetch_crypto_data(asset_list):
     combined_df = pd.concat(all_frames, ignore_index=True)
     return combined_df.sort_values(by=['date', 'asset']).reset_index(drop=True)
 
-def save_to_database(df, db_path='data/finance_data.db'):
-    """Saves DataFrame to SQLite database."""
-    # Ensure the directory exists before saving
-    os.makedirs(os.path.dirname(db_path), exist_ok=True)
+def save_to_supabase(df):
+    """Persists the DataFrame into the Supabase (PostgreSQL) database."""
+    database_url = os.getenv("DATABASE_URL")
     
+    if not database_url:
+        print("❌ Error: DATABASE_URL not found in environment variables.")
+        return
+
     try:
-        conn = sqlite3.connect(db_path)
-        df.to_sql('crypto_prices', conn, if_exists='append', index=False)
-        conn.close()
-        print(f"✅ Data successfully persisted in {db_path}")
+        engine = create_engine(database_url)
+        df.to_sql('crypto_prices', engine, if_exists='append', index=False)
+        print("✅ Data successfully pushed to Supabase Cloud!")
     except Exception as e:
-        print(f"❌ Database error: {e}")
+        print(f"❌ Cloud Database error: {e}")
 
 if __name__ == "__main__":
-    print("🚀 Starting Automated ETL Pipeline...")
-    my_assets = ['bitcoin', 'ethereum', 'solana', 'cardano']
+    print("🚀 Starting Cloud-Native ETL Pipeline...")
+    assets = ['bitcoin', 'ethereum', 'solana', 'cardano']
+    data = fetch_crypto_data(assets)
     
-    # 1. Extract & Transform
-    final_data = fetch_crypto_data(my_assets)
-    
-    # 2. Load
-    if not final_data.empty:
-        save_to_database(final_data)
-        print("🎉 ETL Run Completed Successfully!")
-    else:
-        print("❌ ETL Run Failed: No data extracted.") 
+    if not data.empty:
+        save_to_supabase(data)

@@ -1,7 +1,11 @@
 import streamlit as st
 import pandas as pd
-import sqlite3
 import os
+from sqlalchemy import create_engine
+from dotenv import load_dotenv
+
+# Carrega as senhas do arquivo .env
+load_dotenv()
 
 # 1. Page Configuration
 st.set_page_config(page_title="Crypto Index Dashboard", page_icon="📈", layout="wide")
@@ -9,18 +13,17 @@ st.set_page_config(page_title="Crypto Index Dashboard", page_icon="📈", layout
 st.title("📈 Crypto Index ETL Dashboard")
 st.markdown("Interactive visualization of the Automated ETL Pipeline.")
 
-# 2. Data Extraction Function (with caching for performance)
+# 2. Data Extraction Function (Cloud PostgreSQL)
 @st.cache_data
 def load_data():
-    db_path = 'data/finance_data.db'
-    if not os.path.exists(db_path):
-        return pd.DataFrame() 
+    db_url = os.getenv("DATABASE_URL")
+    if not db_url:
+        st.error("DATABASE_URL variable is missing.")
+        return pd.DataFrame()
         
-    conn = sqlite3.connect(db_path)
-    df = pd.read_sql_query("SELECT * FROM crypto_prices", conn)
-    conn.close()
+    engine = create_engine(db_url)
+    df = pd.read_sql_query("SELECT * FROM crypto_prices", engine)
     
-    # FIX: Adding format='mixed' to handle missing microseconds in SQLite strings
     df['date'] = pd.to_datetime(df['date'], format='mixed')
     return df
 
