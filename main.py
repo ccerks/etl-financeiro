@@ -52,4 +52,4 @@ if __name__ == "__main__":
         save_to_database(final_data)
         print("🎉 ETL Run Completed Successfully!")
     else:
-        print("❌ ETL Run Failed: No data extracted.")
+        print("❌ ETL Run Failed: No data extracted.") 
