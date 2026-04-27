@@ -32,10 +32,10 @@ The pipeline is designed with a modern cloud-native approach and multi-source in
 ## 🚀 How to Run
 
   1. **Clone the repository:**
-   ```bash
-   git clone [https://github.com/ccerks/etl-financeiro.git](https://github.com/ccerks/etl-financeiro.git)
+     ```bash
+     git clone [https://github.com/ccerks/etl-financeiro.git](https://github.com/ccerks/etl-financeiro.git)
 
-  2. **Set up the virtual environment:**
+ 2. **Set up the virtual environment:**
      ```bash
      python -m venv venv
      source venv/Scripts/activate  # Windows: .\venv\Scripts\activate
