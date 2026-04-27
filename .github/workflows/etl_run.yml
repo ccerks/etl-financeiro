@@ -29,3 +29,9 @@ jobs:
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: python main.py
+
+      - name: Execute ETL Script
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+        run: python main.py
