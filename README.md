@@ -1,43 +1,45 @@
-# Financial Data Engineering Pipeline - Crypto Index 📈
+# Financial Data Engineering Pipeline - Multi-Asset Index 📈
 
-This project is a complete Data Engineering laboratory that implements a professional ETL (Extract, Transform, Load) pipeline. It automates the collection of cryptocurrency data, stores it in a cloud-based relational database, and provides an interactive analytics dashboard.
+This project is a complete Data Engineering laboratory that implements a professional ETL (Extract, Transform, Load) pipeline. It automates the collection of financial data across multiple markets (Cryptocurrencies and Traditional Assets), stores it in a cloud-based relational database, and provides an interactive analytics dashboard.
 
 ## 🏗️ Project Architecture
 
-The pipeline is designed with a modern cloud-native approach:
+The pipeline is designed with a modern cloud-native approach and multi-source integration:
 
-- **Data Source:** Real-time data extraction via CoinGecko REST API.
-- **Orchestration:** Automated execution using GitHub Actions (CI/CD).
-- **Storage:** Cloud-based PostgreSQL database (Supabase) using SQLAlchemy.
-- **Frontend:** Interactive Analytics Dashboard built with Streamlit Cloud.
-- **Security:** Environment variable management (`.env`) and Secret Management (GitHub/Streamlit).
+- **Data Sources:** - Real-time Crypto extraction via CoinGecko REST API (Optimized with Batch Processing to handle Rate Limiting).
+  - Traditional Markets (S&P 500, Gold) extraction via Yahoo Finance API.
+- **Orchestration:** Automated execution using GitHub Actions (CI/CD) running on a daily cron schedule.
+- **Storage:** Cloud-based PostgreSQL database (Supabase) managed with SQLAlchemy.
+- **Frontend:** Interactive Multi-Tab Analytics Dashboard built with Streamlit Cloud.
+- **Security:** Strict Secret Management for Database URLs via GitHub Secrets and Streamlit Cloud configuration.
 
 ## 📂 Project Structure
 
-- `main.py`: The core ETL engine (Extraction & Cloud Loading).
-- `app.py`: Streamlit dashboard with financial indicators (MA7, % Delta).
-- `notebooks/`: Experimental development and API testing.
-- `requirements.txt`: Project dependencies for cloud deployment.
-- `.env`: Local credentials (ignored by Git).
+- `main.py`: The core ETL engine handling extraction, transformation, and database loading.
+- `app.py`: Streamlit dashboard featuring multi-tab views, moving averages (MA7), and percentage deltas.
+- `notebooks/`: Experimental development, data modeling, and API testing.
+- `requirements.txt`: Project dependencies for seamless cloud deployment.
+- `.github/workflows/`: Contains the YAML configuration for the automated CI/CD pipeline.
 
 ## 🛠️ Technologies Used
 
 - **Python 3.12+**
-- **Pandas:** Data manipulation and feature engineering.
-- **SQLAlchemy:** SQL Toolkit and Object Relational Mapper (ORM).
-- **Streamlit:** Interactive data visualization.
-- **PostgreSQL (Supabase):** Relational cloud database.
-- **GitHub Actions:** Automated workflow orchestration.
+- **Data Engineering:** Pandas, SQLAlchemy, psycopg2-binary.
+- **APIs & Extraction:** Requests, yfinance.
+- **Visualization:** Streamlit.
+- **Infrastructure:** PostgreSQL (Supabase), GitHub Actions.
 
 ## 🚀 How to Run
 
   1. **Clone the repository:**
-     ```bash
-     git clone https://github.com/ccerks/etl-financeiro.git
+   ```bash
+   git clone [https://github.com/ccerks/etl-financeiro.git](https://github.com/ccerks/etl-financeiro.git)
+
   2. **Set up the virtual environment:**
      ```bash
      python -m venv venv
      source venv/Scripts/activate  # Windows: .\venv\Scripts\activate
+
   3. **Install dependencies:**
      ```bash
      pip install -r requirements.txt
@@ -47,7 +49,6 @@ The pipeline is designed with a modern cloud-native approach:
      Create a .env file and add your DATABASE_URL.
 
 📈 Roadmap (Milestones)
-
 [x] Multi-asset extraction implementation.
 
 [x] Cloud Database migration (SQLite to PostgreSQL/Supabase).
@@ -56,6 +57,10 @@ The pipeline is designed with a modern cloud-native approach:
 
 [x] Interactive Dashboard with Moving Averages and KPIs.
 
-[ ] Implement Logging & Error Handling system.
+[x] Multi-Source Integration (Crypto + Traditional Markets).
+
+[x] API Optimization (Batch Processing to prevent HTTP 429 errors).
+
+[ ] Implement robust Logging & Error Handling system.
 
 **Developed by** [Caio Cerqueira](https://github.com/ccerks) 🚀
