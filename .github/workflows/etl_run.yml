@@ -1,11 +1,10 @@
 name: Automated Crypto ETL
 
-# The trigger: When should this robot wake up?
 on:
   schedule:
-    # Runs every day at 12:00 UTC (09:00 no Brasil)
+    # Runs every day at 12:00 UTC (09:00 BRT)
     - cron: '0 12 * * *'
-  # Allows you to trigger the action manually from the GitHub website
+  # Allows manual trigger from the GitHub Actions tab
   workflow_dispatch:
 
 jobs:
@@ -13,22 +12,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Download your code to the GitHub server
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Step 2: Install Python
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
-      # Step 3: Install the required libraries
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pandas requests
+          pip install -r requirements.txt
 
-      # Step 4: Run the extraction script
       - name: Execute ETL Script
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: python main.py
