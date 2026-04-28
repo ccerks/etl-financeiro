@@ -50,16 +50,18 @@ The pipeline is designed with a modern cloud-native approach, focusing on perfor
     WEBHOOK_URL=[https://discord.com/api/webhooks/](https://discord.com/api/webhooks/)...
 
 📈 Roadmap (Milestones)
-[x] Multi-asset extraction and Cloud Database integration.
+- [x] Multi-asset extraction and Cloud Database integration.
 
-[x] CI/CD Automation with GitHub Actions.
+- [x] CI/CD Automation with GitHub Actions.
 
-[x] API Optimization (Batch Processing).
+- [x] API Optimization (Batch Processing).
 
-[x] Real-time Error Alerting System via Discord Webhooks.
+- [x] Real-time Error Alerting System via Discord Webhooks.
 
-[x] Performance Optimization migrating calculations to PostgreSQL Views.
+- [x] Performance Optimization migrating calculations to PostgreSQL Views.
 
-[ ] Add Data Quality checks (Great Expectations) before database ingestion.
+- [ ] Add Data Quality checks (Great Expectations) before database ingestion.
+
+- [ ] **Future Upgrade:** Migrate database granularity from Daily (Date) to Intra-day (Timestamp) to support high-frequency candlestick charting.
 
 **Developed by** [Caio Cerqueira](https://github.com/ccerks) 🚀
