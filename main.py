@@ -76,6 +76,44 @@ def extract_traditional_markets():
 
     return pd.DataFrame(data_list)
 
+def validate_data_quality(df, source_name):
+    """
+    Validates data quality: uniqueness, completeness, and logical volume.
+    Filters out bad records and triggers an alert if anomalies are detected.
+    """
+    if df.empty:
+        print(f"⚠️ Validation skipped: No data received from {source_name}.")
+        return df
+        
+    initial_count = len(df)
+    
+    # 1. Uniqueness: Drop duplicate combinations of Date + Asset
+    df_clean = df.drop_duplicates(subset=['date', 'asset'])
+    
+    # 2. Completeness: Remove rows where price_usd is NaN/Null
+    df_clean = df_clean.dropna(subset=['price_usd'])
+    
+    # 3. Volume Logic: Prices must be strictly positive
+    df_clean = df_clean[df_clean['price_usd'] > 0]
+    
+    final_count = len(df_clean)
+    
+    # Alert if data was dropped during quality checks
+    if final_count < initial_count:
+        dropped_rows = initial_count - final_count
+        warning_msg = f"Data Quality Warning: Dropped {dropped_rows} invalid row(s) from {source_name}."
+        print(f"⚠️ {warning_msg}")
+        send_webhook_alert(warning_msg, "validate_data_quality")
+        
+    if df_clean.empty:
+        error_msg = f"Data Quality Failure: All records from {source_name} failed validation."
+        print(f"❌ {error_msg}")
+        send_webhook_alert(error_msg, "validate_data_quality")
+        return pd.DataFrame() # Return empty to prevent database load
+        
+    print(f"✅ Data Quality Check passed for {source_name}.")
+    return df_clean
+
 def load_to_database(df, table_name):
     """Loads DataFrame to PostgreSQL Cloud Database."""
     if df.empty:
@@ -96,12 +134,21 @@ def load_to_database(df, table_name):
         send_webhook_alert(error_details, f"load_to_database ({table_name})")
 
 if __name__ == "__main__":
-    print("🚀 Starting Multi-Source ETL Pipeline...")
+    print("🚀 Starting Cloud-Native ETL Pipeline with Data Quality Checks...")
     
-    df_crypto = extract_crypto_data()
-    df_traditional = extract_traditional_markets()
+    # 1. Extraction (Bronze Layer)
+    df_crypto_raw = extract_crypto_data()
+    df_traditional_raw = extract_traditional_markets()
     
-    load_to_database(df_crypto, 'crypto_prices')
-    load_to_database(df_traditional, 'traditional_markets')
+    # 2. Transformation & Quality Assurance (Silver Layer)
+    df_crypto_clean = validate_data_quality(df_crypto_raw, "Crypto API")
+    df_traditional_clean = validate_data_quality(df_traditional_raw, "Traditional Markets API")
+    
+    # 3. Load (Gold Layer Storage)
+    if not df_crypto_clean.empty:
+        load_to_database(df_crypto_clean, 'crypto_prices')
+        
+    if not df_traditional_clean.empty:
+        load_to_database(df_traditional_clean, 'traditional_markets')
     
     print("🏁 Pipeline execution completed.")
